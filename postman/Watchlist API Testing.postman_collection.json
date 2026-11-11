@@ -1,0 +1,151 @@
+{
+  "info": {
+    "_postman_id": "e6f39e56-87fd-44a8-aa38-512d3e1ab337",
+    "name": "Watchlist API Testing",
+    "description": "Watchlist POST and GET API tests. Configure collection variables with the real API contract before running.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56353607",
+    "_collection_link": "https://go.postman.co/collection/56353607-e6f39e56-87fd-44a8-aa38-512d3e1ab337?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "watchlist_post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Watchlist item created successfully\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "",
+              "pm.test(\"Response time below 3 seconds\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{{watchlistPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{watchlistPostPath}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{watchlistPostPath}}"
+          ]
+        },
+        "description": "Replace the placeholder endpoint and payload with the actual API contract."
+      },
+      "response": []
+    },
+    {
+      "name": "watchlist_get",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Watchlist retrieved successfully\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response time below 3 seconds\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "});",
+              "",
+              "pm.test(\"Response is valid JSON\", function () {",
+              "    pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/{{watchlistGetPath}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{watchlistGetPath}}"
+          ]
+        },
+        "description": "Replace the placeholder endpoint with the actual API contract."
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://REPLACE-WITH-API-HOST"
+    },
+    {
+      "key": "watchlistPostPath",
+      "value": "/REPLACE-WITH-POST-PATH"
+    },
+    {
+      "key": "watchlistGetPath",
+      "value": "/REPLACE-WITH-GET-PATH"
+    }
+  ]
+}
